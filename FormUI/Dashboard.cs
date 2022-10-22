@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SQLDataAccessDemo
+namespace FormUI
 {
     public partial class Dashboard : Form
     {
@@ -18,7 +18,13 @@ namespace SQLDataAccessDemo
         {
             InitializeComponent();
 
-            UpdateBindings();
+            UpdateBinding();
+        }
+
+        private void UpdateBinding()
+        {
+            peopleFoundListbox.DataSource = people;
+            peopleFoundListbox.DisplayMember = "FullInfo";
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -27,13 +33,7 @@ namespace SQLDataAccessDemo
 
             people = db.GetPeople(lastNameText.Text);
 
-            UpdateBindings();
-        }
-
-        private void UpdateBindings()
-        {
-            peopleFoundListbox.DataSource = people;
-            peopleFoundListbox.DisplayMember = "FullInfo";
+            UpdateBinding();
         }
 
         private void insertRecordButton_Click(object sender, EventArgs e)
